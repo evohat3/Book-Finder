@@ -13,10 +13,8 @@ const resolvers = {
     },
 
     Mutation: {
-        login: async (parent, {username, password }) => {
-            const user = await User.findOne({
-                $or: [{username}, {email:username}], 
-            });
+        login: async (parent, {email, password }) => {
+            const user = await User.findOne({email});
             if (!user) {
                 throw new Error('User Not Found');
             }

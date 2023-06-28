@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser, { error }] = useMutation(LOGIN_USER);
 
@@ -24,13 +24,14 @@ const LoginForm = () => {
       event.stopPropagation();
       return;
     }
-
+    setValidated(true);
     try {
+      console.log('userFormData:', userFormData);
       const { data } = await loginUser({
         variables: { ...userFormData },
       });
 
-      Auth.login(data.loginUser.token);
+      Auth.login(data.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

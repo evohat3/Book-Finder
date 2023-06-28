@@ -9,7 +9,7 @@ const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   // set state for form validation
-  const [validated] = useState(false);
+  const [validated, setValidated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false); // state for alert
   const [addUser, { error }] = useMutation(ADD_USER); // mutation function and error state
@@ -21,22 +21,22 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(' SignupForm.js L25    Form submitted');
+    console.log('SignupForm.js L25: Form submitted');
   
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
       return;
     }
-  
+    setValidated(true)
     try {
+      console.log('userFormData:', userFormData); // Add this line to log userFormData
       const { data } = await addUser({
         variables: userFormData,
       });
       console.log('Add user mutation result:', data);
   
-      Auth.login(data.token);
+      Auth.login(data.token)
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -47,7 +47,7 @@ const SignupForm = () => {
       email: '',
       password: '',
     });
-
+  
     if (error) {
       setShowAlert(true);
     }
