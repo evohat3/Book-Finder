@@ -21,7 +21,7 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('SignupForm.js L25: Form submitted');
+    // console.log('SignupForm.js L25: Form submitted');
   
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -30,11 +30,11 @@ const SignupForm = () => {
     }
     setValidated(true)
     try {
-      console.log('userFormData:', userFormData); // Add this line to log userFormData
+      // console.log('userFormData:', userFormData); // Add this line to log userFormData
       const { data } = await addUser({
         variables: userFormData,
       });
-      console.log('Add user mutation result:', data);
+      // console.log('Add user mutation result:', data);
   
       Auth.login(data.token)
     } catch (err) {
