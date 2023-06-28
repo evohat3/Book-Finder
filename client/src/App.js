@@ -12,7 +12,7 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: 'https://personal-library-2923-c441a9706379.herokuapp.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
