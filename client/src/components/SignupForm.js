@@ -16,7 +16,6 @@ const SignupForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(` SignupForm.js L19     name: ${name}, value: ${value}`);
     setUserFormData({ ...userFormData, [name]: value });
   };
 
@@ -33,7 +32,7 @@ const SignupForm = () => {
   
     try {
       const { data } = await addUser({
-        variables: { ...userFormData },
+        variables: userFormData,
       });
       console.log('Add user mutation result:', data);
   
