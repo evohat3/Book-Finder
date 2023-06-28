@@ -33,11 +33,11 @@ const SignupForm = () => {
   
     try {
       const { data } = await addUser({
-        variables: userFormData,
+        variables: { ...userFormData },
       });
       console.log('Add user mutation result:', data);
   
-      Auth.login(data.addUser.token);
+      Auth.login(data.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
